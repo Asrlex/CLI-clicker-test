@@ -1,0 +1,24 @@
+{
+  "open tasks":[
+    {
+      "id": 123456789012,
+      "fechaInicio": "20/09/2022 09:45",
+      "docs":[
+        {
+          "tipo": "Tipo 1",
+          "fechaInicio": "20/09/2022 09:48",
+          "fechaFin": "20/09/2022 09:57",
+          "observaciones": "--"
+        },
+        {
+          "tipoDoc": "Tipo 3",
+          "fechaInicioDoc": "20/09/2022 09:59",
+          "fechaFinDoc": "20/09/2022 10:06",
+          "observacionesDoc": "--"
+        }
+      ],
+      "fechaCierre": "20/09/2022 10:12",
+      "observaciones": "--"
+    }
+  ]
+}
