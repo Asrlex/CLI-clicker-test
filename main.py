@@ -1,14 +1,15 @@
 import re
 import Task
-# import JSONHandler
-# from pprint import pprint
+import JSONHandler
+from pprint import pprint
+
 
 tareaActual = None
 def main():
-  # JSONHandler.loadJSON()
-  # data = JSONHandler.file_data
-  # for x in data["open tasks"]:
-  #   pprint(x)
+  JSONHandler.loadJSON()
+  data = JSONHandler.file_data
+  for x in data["open tasks"]:
+    pprint(x)
   while True:
     printInitialMenu()
     inp = input()
@@ -70,7 +71,6 @@ def loadTask():
       tareaActual = Task(expediente)
       tareaActual.load_from_file()
       break
-
   
 
 if __name__ == "__main__":

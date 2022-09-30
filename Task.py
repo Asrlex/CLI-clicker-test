@@ -37,18 +37,18 @@ class Task:
   def set_docs(self, docs):
     self.docs = docs
 
-  def to_json(self):
-    jsonDocs = [
-      {
+  # def to_json(self):
+  #   jsonDocs = [
+  #     {
         
-      }
-    ]
-    jsonTask = {
-      "id": self.get_id(),
-      "fechaInicio": "",
-      "fechaFin": "",
-      "observaciones": ""
-    }
+  #     }
+  #   ]
+  #   jsonTask = {
+  #     "id": self.get_id(),
+  #     "fechaInicio": "",
+  #     "fechaFin": "",
+  #     "observaciones": ""
+  #   }
 
-  def load_from_file():
+  # def load_from_file():
     
