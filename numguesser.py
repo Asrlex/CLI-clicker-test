@@ -8,14 +8,19 @@ close_range = int((max-min)/100*20)
 closest_range = int((max-min)/100*5)
 guesses = 0
 
+def guessNumber():
+    while True:
+        print("\nGuess")
+        guess = int(input(" > "))
+        if guess > max or guess < min:
+            print("Dude can you read?")
+            continue
+    return guess
+
 while True:
-    print("\nGuess")
-    guess = int(input(" > "))
+    guess = guessNumber()
     guesses+=1
-    if guess > max or guess < min:
-        print("Dude can you read?")
-        continue
-    elif guess == number:
+    if guess == number:
         print("Correct!!!")
         break
     elif guess < number:
@@ -34,3 +39,4 @@ while True:
             print("Too high...")
 
 print(f"Congratulations!! You guessed it in {guesses} guesses.")
+
