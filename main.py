@@ -1,77 +1,67 @@
-import re
-import Task
-import JSONHandler
-from pprint import pprint
+import random
+import test
+
+def clearLine():
+    print ("\033[A\033[A")
+
+def drawFigure(lives):
+    test.drawFigure(lives)
+
+def displayWord(word, guesses):
+    print("\n")
+    for letter in word:
+        if letter in guesses:
+            print(f"{letter}", end="")
+        else:
+            print("_", end="")
+    print("\n")
 
 
-tareaActual = None
-def main():
-  JSONHandler.loadJSON()
-  data = JSONHandler.file_data
-  for x in data["open tasks"]:
-    pprint(x)
-  while True:
-    printInitialMenu()
-    inp = input()
-    if inp == "3":
-      print("Saliendo del programa\n")
-      break
-    elif inp == "2":
-      loadTask("CARGAR")
-    elif inp == "1":
-      newTask()
+listOfWords = ["british", "suave", "integrity", "accent", "evil", "genius", "Downton"]
+word = random.choice(listOfWords)
+
+print("🌟Hangman🌟\n")
+lives = 8
+guesses = []
+won = False
+
+while won == False and lives > 0:
     
+    displayWord(word, guesses)
 
-def printInitialMenu():
-  print("    **SEGUIMIENTO MINUTAS**")
-  if(tareaActual != ""):
-    print("\n ID Tarea cargada: {}".format(tareaActual))
-  else:
-    print("\n No hay ninguna tarea cargada")
-    
-  print("\n\t 1- Nueva tarea.")
-  print("\n\t 2- Cargar tarea.")
-  print("\n\t 3- Cerrar.")
+    choice = input("Letter or word: ")
+    if choice.lower() in ["letter", "l"]:
+        
+        guess = input("Guess a letter: ")
+        guesses.append(guess)
+        if guess not in word:
+            print("Nope, worng!")
+            lives-=1
+            print(f"You have {lives} lives left")
+            drawFigure(lives)
+            continue
+        elif guess in word:
+            count = word.count(guess)
+            if count == 1:
+                print("Great! There's one")
+            else:
+                print(f"Amazing! There are {count} {guess}'s!!")
+            continue
+    elif choice.lower() in ["word", "w"]:
+        guess = input("Guess the whole word: ")
+        if guess == word:
+            if lives > len(word):
+                print("Amazing!!! How did you do it??")
+            else:
+                print("Great! You got it!")
+            won = True
+        else:
+            print("Tough luck, you got greedy...")
+            lives-=3
+            print(f"You have {lives} lives left")
+            drawFigure(lives)
 
-
-def newTask():
-  global tareaActual
-  print("\n NUEVA TAREA")
-  while True:
-    while True:
-      print("Escriba ID de la tarea: ")
-      expediente = input()
-      s = re.search("\d{12}", expediente)
-      if (len(expediente) == 12) and (s.string == expediente):
-        break
-      else:
-        print("Formato incorrecto.")
-    print("¿Desea crear la tarea {t}?".format(t=expediente))
-    r = input()
-    if r == "SI":
-      tareaActual = Task(expediente)
-      break
-
-
-def loadTask():
-  global tareaActual
-  print("\n CARGAR TAREA")
-  while True:
-    while True:
-      print("Escriba ID de la tarea: ")
-      expediente = input()
-      s = re.search("\d{12}", expediente)
-      if (len(expediente) == 12) and (s.string == expediente):
-        break
-      else:
-        print("Formato incorrecto.")
-    print("¿Desea cargar la tarea {t}?".format(t=expediente))
-    r = input()
-    if r == "SI":
-      tareaActual = Task(expediente)
-      tareaActual.load_from_file()
-      break
-  
-
-if __name__ == "__main__":
-  main()
+if won == True:
+    print(f"Congratulations!! You won with {lives} lives left.")
+else:
+    print(f"Too bad, you lost... The word was {word}.")
