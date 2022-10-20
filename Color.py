@@ -9,5 +9,8 @@ class Color:
     cyan = "\033[36m"
     white = "\033[37m"
 
-    def __init__(self, default):
+    def __init__(self):
         pass
+   
+    def eraseLine():
+        print ("\033[A\033[A")
